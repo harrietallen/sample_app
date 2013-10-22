@@ -21,28 +21,28 @@ describe "Static pages" do
   describe "Help page" do
     before { visit help_path }
     let(:heading)    { 'Help' }
-    let(:page_title) { '' }
+    let(:page_title) { 'Help' }
 
     it_should_behave_like "all static pages"
-    it { should_not have_title('| Home') }
+ 
   end
 
   describe "About page" do
     before { visit about_path }
     let(:heading)    { 'About Us' }
-    let(:page_title) { '' }
+    let(:page_title) { 'About Us' }
 
     it_should_behave_like "all static pages"
-    it { should_not have_title('| Home') }
+  
   end
 
   describe "Contact page" do
     before { visit contact_path }
     let(:heading)    { 'Contact' }
-    let(:page_title) { '' }
+    let(:page_title) { 'Contact' }
 
     it_should_behave_like "all static pages"
-    it { should_not have_title('| Home') }
+
   end
   
     it "should have the right links on the layout" do

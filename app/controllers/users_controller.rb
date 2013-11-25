@@ -11,13 +11,14 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
-    def new
+  def new
         @user = User.new
   end
   
-    def create
+  def create
     @user = User.new(user_params)
     if @user.save
       sign_in @user
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
     end
   end
   
-   def edit
+  def edit
 #    @user = User.find(params[:id])
   end
   
@@ -52,28 +53,28 @@ end
 
   private
 
-    def user_params
+  def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
-    end
+  end
     
-        # Before filters
+  # Before filters
 
-    def signed_in_user
+  def signed_in_user
       unless signed_in?
         store_location
         redirect_to signin_url, notice: "Please sign in."
-      end
-    end
+     end
+  end
 
-    def correct_user
+  def correct_user
         @user = User.find(params[:id]) # doing here not in edit or update 
       redirect_to(root_url) unless current_user?(@user)
-    end
+  end
 
-    def admin_user
+  def admin_user
       redirect_to(root_url) unless current_user.admin?
-    end
+  end
     
 end
 

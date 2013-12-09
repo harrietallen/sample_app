@@ -16,6 +16,7 @@ def show
 
   def new
         @user = User.new
+        
   end
   
   def create
